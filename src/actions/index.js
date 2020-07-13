@@ -13,6 +13,7 @@ export const signOut = () => {
   };
 };
 
+// embedded function makes use of redux-thunk
 export const createStream = (formValues) => async (dispatch) => {
   streams.post("/streams", formValues);
 };
