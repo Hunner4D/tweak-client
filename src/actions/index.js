@@ -5,10 +5,10 @@ export const signIn = (userId) => async (dispatch) => {
   let bytes = Base64.encode(userId);
   let uuidInstance = await server.post("/user", {bytes});
   console.log(uuidInstance);
-  return {
+  dispatch({
     type: "SIGN_IN",
     payload: bytes,
-  };
+  });
 };
 
 export const signOut = () => {
@@ -21,9 +21,6 @@ export const signOut = () => {
 export const createStream = (formValues) => async (dispatch) => {
   server.post("/streams", formValues);
 };
-
-
-
 
 
 
