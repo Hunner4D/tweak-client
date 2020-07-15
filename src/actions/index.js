@@ -1,19 +1,15 @@
 import { Base64 } from 'js-base64';
 import server from "../apis/server";
 
-export const signIn = (userId) => {
+export const signIn = (userId) => async (dispatch) => {
   let bytes = Base64.encode(userId);
-  // let uuidInstance = server.post("/user", bytes).then(res => { return res});
-  // console.log(uuidInstance);
+  let uuidInstance = await server.post("/user", {bytes});
+  console.log(uuidInstance);
   return {
     type: "SIGN_IN",
     payload: bytes,
   };
 };
-
-export const signInInstance = (userId) => async (dispatch) => {
-  server.post("/user", userId);
-}
 
 export const signOut = () => {
   return {
