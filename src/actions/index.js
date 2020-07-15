@@ -3,11 +3,11 @@ import server from "../apis/server";
 
 export const signIn = (userId) => async (dispatch) => {
   let bytes = Base64.encode(userId);
-  let uuidInstance = await server.post("/user", {bytes});
-  console.log(uuidInstance);
+  let userInstance = (await server.post("/user", {bytes})).data.instance;
+  console.log(userInstance);
   dispatch({
     type: "SIGN_IN",
-    payload: bytes,
+    payload: { bytes, userInstance }
   });
 };
 
@@ -21,7 +21,6 @@ export const signOut = () => {
 export const createStream = (formValues) => async (dispatch) => {
   server.post("/streams", formValues);
 };
-
 
 
 
