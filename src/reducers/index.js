@@ -4,6 +4,7 @@ import { reducer as formReducer } from "redux-form";
 import authReducer from "./authReducer";
 
 export default combineReducers({
+  replaceMe: () => "dummy reducer",
   auth: authReducer,
   form: formReducer,
 });
