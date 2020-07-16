@@ -4,7 +4,7 @@ import server from "../apis/server";
 export const signIn = (userId) => async (dispatch) => {
   let bytes = Base64.encode(userId);
   let userInstance = (await server.post("/user", {bytes})).data;
-  console.log(userInstance);
+  console.log("instance from sign in:", userInstance);
   dispatch({
     type: "SIGN_IN",
     payload: { bytes, userInstance }

@@ -42,6 +42,10 @@ class StreamCreate extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return { userInstance: state.auth.userInstance }
+}
+
 const validate = (formValues) => {
   const errors = {};
   //error properties must match name is field components
@@ -60,4 +64,4 @@ const formWrapped = reduxForm({
   validate: validate,
 })(StreamCreate);
 
-export default connect(null, { createStream })(formWrapped);
+export default connect(mapStateToProps, { createStream })(formWrapped);
