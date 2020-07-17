@@ -21,7 +21,11 @@ class StreamCreate extends React.Component {
   }
 
   onSubmit = (formValues) => {
-    this.props.createStream(formValues);
+    let query = {
+      userInstance: this.props.userInstance,
+      ...formValues
+    }
+    this.props.createStream(query);
   }
 
   render() {

@@ -18,8 +18,8 @@ export const signOut = () => {
 };
 
 // embedded function makes use of redux-thunk
-export const createStream = (formValues) => async (dispatch) => {
-  const response = server.post("/streams", formValues);
+export const createStream = (query) => async (dispatch) => {
+  const response = server.post("/streams", query);
 
   dispatch({ type: "CREATE_STREAM", payload: response.data })
 };
