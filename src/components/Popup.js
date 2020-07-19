@@ -13,7 +13,13 @@ const PopupComponent = (props) => {
     >
       <Modal.Header>Welcome to Tweak!</Modal.Header>
       <Modal.Content image>
-        <Image wrapped size="medium" src={props.profileImage} />
+        <Image
+          wrapped
+          size="medium"
+          floated={"right"}
+          rounded
+          src={props.profileImage}
+        />
         <Modal.Description>
           <Header>Hello{props.username ? ` ${props.username}` : "..."}</Header>
           <p>

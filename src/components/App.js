@@ -7,6 +7,7 @@ import StreamDelete from "./streams/StreamDelete";
 import StreamEdit from "./streams/StreamEdit";
 import StreamList from "./streams/StreamList";
 import StreamShow from "./streams/StreamShow";
+import EditProfile from "./user/EditProfile";
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
             exact
             render={({ history }) => <StreamShow />}
           />
+          <Route path="/profile/edit" exact render={({ history }) => <EditProfile />} />
         </div>
       </BrowserRouter>
     </div>
