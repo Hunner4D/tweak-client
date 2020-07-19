@@ -12,10 +12,11 @@ export const fetchMultipleStreams = (query) => async (dispatch) => {
   dispatch({ type: "FETCH_STREAMS", payload: response.data });
 };
 
-export const createStream = (query) => async (dispatch) => {
+export const createStream = (query, history) => async (dispatch) => {
   const response = await server.post("/streams", query);
 
   dispatch({ type: "CREATE_STREAM", payload: response.data });
+  history.push("/");
 };
 
 export const editStream = (id, query) => async (dispatch) => {

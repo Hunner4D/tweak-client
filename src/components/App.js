@@ -19,12 +19,12 @@ const App = () => {
           <Route
             path="/streams/new"
             exact
-            render={({ history }) => <StreamCreate />}
+            render={({ history }) => <StreamCreate history={history} />}
           />
           <Route
-            path="/streams/edit"
+            path="/streams/edit/:id"
             exact
-            render={({ history }) => <StreamEdit />}
+            render={({ history, location }) => <StreamEdit location={location}/>}
           />
           <Route
             path="/streams/delete"

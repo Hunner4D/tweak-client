@@ -5,14 +5,22 @@ import server from "../apis/server";
 // let bytes = Base64.encode(userId);
 // let decoded = Base64.atob(bytes);
 
-export const signIn = (userId) => async (dispatch) => {
-  let bytes = Base64.encode(userId);
-  let response = (await server.post("/user", { bytes })).data;
+export const signIn = (query) => async (dispatch) => {
+  let bytes = Base64.encode(query.id);
+  let response = (
+    await server.post("/user", {
+      bytes,
+      username: query.username,
+      profileImage: query.profileImage,
+    })
+  ).data;
   dispatch({
     type: "SIGN_IN",
     payload: {
       bytes,
       userInstance: response.instance,
+      username: query.username,
+      profileImage: query.profileImage,
       newUser: response.newUser,
     },
   });
@@ -21,5 +29,11 @@ export const signIn = (userId) => async (dispatch) => {
 export const signOut = () => {
   return {
     type: "SIGN_OUT",
+  };
+};
+
+export const newUserFalse = () => {
+  return {
+    type: "NEW_USER_FALSE",
   };
 };
