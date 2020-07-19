@@ -11,6 +11,7 @@ export default (state = INITIAL_STATE, action) => {
         isSignedIn: true,
         userId: action.payload.bytes,
         userInstance: action.payload.userInstance,
+        newUser: action.payload.newUser
       };
     case "SIGN_OUT":
       return { ...state, isSignedIn: false, userId: null, userInstance: null };

@@ -2,7 +2,7 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 // Field = componenet, reduxForm = connect function
 import { connect } from "react-redux";
-import { createStream } from "../../actions/index";
+import { createStream } from "../../actions/streams";
 
 class StreamCreate extends React.Component {
   renderInput({ input, label, meta }) {
@@ -22,6 +22,7 @@ class StreamCreate extends React.Component {
 
   onSubmit = (formValues) => {
     let query = {
+      userId: this.props.userId,
       userInstance: this.props.userInstance,
       ...formValues
     }
@@ -47,7 +48,7 @@ class StreamCreate extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { userInstance: state.auth.userInstance }
+  return { userId: state.auth.userId, userInstance: state.auth.userInstance }
 }
 
 const validate = (formValues) => {
