@@ -19,8 +19,8 @@ export const signIn = (query) => async (dispatch) => {
     payload: {
       bytes,
       userInstance: response.instance,
-      username: query.username,
-      profileImage: query.profileImage,
+      username: response.username,
+      profileImage: response.profileImage,
       newUser: response.newUser,
     },
   });
