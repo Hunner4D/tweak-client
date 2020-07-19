@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { signIn, signOut } from "../actions/auth";
+import { Menu } from "semantic-ui-react";
 
 class GoogleAuth extends React.Component {
   componentDidMount() {
@@ -23,11 +24,11 @@ class GoogleAuth extends React.Component {
 
   onAuthChange = (isSignedIn) => {
     if (isSignedIn) {
-      console.log("sign in info here: ", this.auth.currentUser.get())
+      console.log("sign in info here: ", this.auth.currentUser.get());
       let id = this.auth.currentUser.get().Qt.JU;
       let username = this.auth.currentUser.get().Qt.Bd;
-      let profileImage = this.auth.currentUser.get().Qt.MK
-      this.props.signIn({id, username, profileImage}); 
+      let profileImage = this.auth.currentUser.get().Qt.MK;
+      this.props.signIn({ id, username, profileImage });
     } else {
       this.props.signOut();
     }
@@ -46,23 +47,19 @@ class GoogleAuth extends React.Component {
       return null;
     } else if (this.props.isSignedIn) {
       return (
-        <button
-          className="ui purple google button"
+        <Menu.Item
+          name="logout"
           onClick={this.onSignOutClick}
-        >
-          <i className="google icon" />
-          Sign Out
-        </button>
+          icon={"google"}
+        />
       );
     } else {
       return (
-        <button
-          className="ui purple google button"
+        <Menu.Item
+          name="Sign in with google"
           onClick={this.onSignInClick}
-        >
-          <i className="google icon" />
-          Sign In with Google
-        </button>
+          icon={"google"}
+        />
       );
     }
   }

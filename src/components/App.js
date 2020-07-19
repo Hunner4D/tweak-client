@@ -15,7 +15,7 @@ const App = () => {
       <BrowserRouter>
         <div>
           <PopUp />
-          <Header />
+          <Route render={({ history }) => <Header history={history} />} />
           <Route path="/" exact render={({ history }) => <StreamList />} />
           <Route
             path="/streams/new"
@@ -25,19 +25,27 @@ const App = () => {
           <Route
             path="/streams/edit/:id"
             exact
-            render={({ history, location }) => <StreamEdit location={location}/>}
+            render={({ history, location }) => (
+              <StreamEdit location={location} />
+            )}
           />
           <Route
-            path="/streams/delete"
+            path="/streams/delete/:id"
             exact
-            render={({ history }) => <StreamDelete />}
+            render={({ history, location }) => (
+              <StreamDelete location={location} />
+            )}
           />
           <Route
-            path="/streams/show"
+            path="/streams/show/:id"
             exact
             render={({ history }) => <StreamShow />}
           />
-          <Route path="/profile/edit" exact render={({ history }) => <EditProfile />} />
+          <Route
+            path="/profile/edit/:id"
+            exact
+            render={({ history }) => <EditProfile />}
+          />
         </div>
       </BrowserRouter>
     </div>

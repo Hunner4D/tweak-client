@@ -30,7 +30,17 @@ class StreamList extends React.Component {
               </Link>
             </Button>
             <Button basic color="red">
-              Delete
+              <Link
+                to={{
+                  pathname: `/streams/delete/${_.truncate(stream.uuid, {
+                    length: 8,
+                    omission: "",
+                  })}`,
+                  state: stream,
+                }}
+              >
+                Delete
+              </Link>
             </Button>
           </div>
         </Card.Content>

@@ -1,5 +1,7 @@
 import React from "react";
 
+import { connect } from "react-redux";
+
 const StreamEdit = (props) => {
   return (
     <>
@@ -8,4 +10,8 @@ const StreamEdit = (props) => {
   );
 };
 
-export default StreamEdit;
+const mapStateToProps = (state, ownProps) => {
+  return { auth: state.auth, ownProps };
+};
+
+export default connect(mapStateToProps)(StreamEdit);
