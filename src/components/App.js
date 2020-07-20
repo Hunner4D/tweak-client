@@ -16,7 +16,7 @@ const App = () => {
         <div>
           <PopUp />
           <Route render={({ history }) => <Header history={history} />} />
-          <Route path="/" exact render={({ history }) => <StreamList />} />
+          <Route path="/" exact render={({ history }) => <StreamList history={history}/>} />
           <Route
             path="/streams/new"
             exact

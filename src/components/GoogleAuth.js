@@ -24,7 +24,6 @@ class GoogleAuth extends React.Component {
 
   onAuthChange = (isSignedIn) => {
     if (isSignedIn) {
-      console.log("sign in info here: ", this.auth.currentUser.get());
       let id = this.auth.currentUser.get().Qt.JU;
       let username = this.auth.currentUser.get().Qt.Bd;
       let profileImage = this.auth.currentUser.get().Qt.MK;

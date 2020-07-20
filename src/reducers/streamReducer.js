@@ -15,7 +15,10 @@ export default (state = [], action) => {
       return { ...state, [action.payload.id]: action.payload };
 
     case "DELETE_STREAM":
-      return _.omit(state, action.payload);
+      let stateCopy = _.remove(state, (obj) => {
+        return obj.uuid !== action.payload
+      })
+      return stateCopy;
 
     default:
       return state;
