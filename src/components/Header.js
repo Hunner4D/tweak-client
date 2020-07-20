@@ -5,19 +5,24 @@ import { Menu, Input } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 class Header extends React.Component {
-  state = { activeItem: "home" };
+  state = { activeItem: "streams" };
 
   componentDidMount() {
-    const guide = { "/": "home" };
+    const guide = { "/": "streams" };
     let current = this.props.history.location.pathname;
-    this.setState({ activeItem: guide[current] });
+    if (guide[current]) {
+      this.setState({ activeItem: guide[current] });
+    }
+    else {
+      this.setState({ activeItem: null });
+    }
   }
 
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name });
 
     switch (name) {
-      case "home":
+      case "streams":
         this.props.history.push("/");
         break;
       case "create stream":
@@ -32,10 +37,10 @@ class Header extends React.Component {
     if (this.props.isSignedIn) {
       return (
         <Menu.Item
-        name="create stream"
-        active={activeItem === "create stream"}
-        onClick={this.handleItemClick}
-      />
+          name="create stream"
+          active={activeItem === "create stream"}
+          onClick={this.handleItemClick}
+        />
       );
     }
   }
@@ -46,8 +51,8 @@ class Header extends React.Component {
       <div>
         <Menu pointing secondary>
           <Menu.Item
-            name="home"
-            active={activeItem === "home"}
+            name="streams"
+            active={activeItem === "streams"}
             onClick={this.handleItemClick}
           />
           <Menu.Item
@@ -75,7 +80,7 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {isSignedIn: state.auth.isSignedIn}
-}
+  return { isSignedIn: state.auth.isSignedIn };
+};
 
 export default connect(mapStateToProps)(Header);
