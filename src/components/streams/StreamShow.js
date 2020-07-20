@@ -33,7 +33,13 @@ const StreamShow = (props) => {
       <Grid columns={3} divided="vertically">
         <Grid.Row stretched>
           <Grid.Column>
-            <Segment size="massive">{props.location.state.title}</Segment>
+            <Segment size="massive">
+              {props.location.state.title}
+              <br />
+              <br />
+              <br />
+              <br />
+            </Segment>
             <Segment size="big">{props.location.state.description}</Segment>
           </Grid.Column>
           <Grid.Column>
