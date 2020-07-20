@@ -11,7 +11,7 @@ import EditProfile from "./user/EditProfile";
 
 const App = () => {
   return (
-    <div className="ui container">
+    <div className="ui fluid container">
       <BrowserRouter>
         <div>
           <PopUp />
