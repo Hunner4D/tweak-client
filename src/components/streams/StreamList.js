@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Card, Button, Modal, Header, Icon } from "semantic-ui-react";
 import _ from "lodash";
-
 import { connect } from "react-redux";
 import { fetchMultipleStreams, deleteStream } from "../../actions/streams";
 
@@ -63,7 +62,7 @@ class StreamList extends React.Component {
                     let query = {
                       userId: this.props.userId,
                       userInstance: this.props.userInstance,
-                      streamId: stream.uuid
+                      streamId: stream.uuid,
                     };
                     this.props.deleteStream(query);
                     this.handleClose();
@@ -87,7 +86,24 @@ class StreamList extends React.Component {
             return (
               <Card key={idx}>
                 <Card.Content>
-                  <Card.Header>{stream.title}</Card.Header>
+                  <Link
+                    to={{
+                      pathname: `/streams/show/${_.truncate(stream.uuid, {
+                        length: 8,
+                        omission: "",
+                      })}`,
+                      state: stream,
+                    }}
+                    style={{
+                      color: "black",
+                      fontWeight: 700,
+                      fontSize: "1.28571429em",
+                      marginTop: "-.21425em",
+                      lineHeight: "1.28571429em",
+                    }}
+                  >
+                    <Card.Header>{stream.title}</Card.Header>
+                  </Link>
                   <Card.Description>{stream.description}</Card.Description>
                 </Card.Content>
 

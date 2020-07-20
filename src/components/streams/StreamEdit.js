@@ -13,7 +13,7 @@ const StreamEdit = (props) => {
             </Feed.Label>
             <Feed.Content>
               <Feed.Summary>
-                <Feed.User>Elliot Fu</Feed.User> added you as a friend
+                <Feed.User>Elliot Fu</Feed.User> this stream fucking sucks
                 <Feed.Date>1 Hour Ago</Feed.Date>
               </Feed.Summary>
               {/* <Feed.Meta>
@@ -30,15 +30,14 @@ const StreamEdit = (props) => {
 
   return (
     <>
-      <Grid columns={3} divided>
+      <Grid columns={3} divided="vertically">
         <Grid.Row stretched>
           <Grid.Column>
-            <Segment>1</Segment>
-            <Segment>2</Segment>
-            <Segment>3</Segment>
+            <Segment size="massive">{props.location.state.title}</Segment>
+            <Segment size="big">{props.location.state.description}</Segment>
           </Grid.Column>
           <Grid.Column>
-            <Segment>1</Segment>
+            <Segment size="massive">1</Segment>
           </Grid.Column>
           <Grid.Column>
             <Segment>1</Segment>
@@ -48,6 +47,7 @@ const StreamEdit = (props) => {
           </Grid.Column>
         </Grid.Row>
       </Grid>
+      {/*  */}
       <Grid columns={3} divided>
         <Grid.Row>
           <Grid.Column width={2}>

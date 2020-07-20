@@ -1,6 +1,6 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-// Field = componenet, reduxForm = connect function
+import { Container } from 'semantic-ui-react'
 import { connect } from "react-redux";
 import { createStream } from "../../actions/streams";
 
@@ -24,32 +24,36 @@ class StreamCreate extends React.Component {
     let query = {
       userId: this.props.userId,
       userInstance: this.props.userInstance,
-      ...formValues
-    }
+      ...formValues,
+    };
     this.props.createStream(query, this.props.history);
-  }
+  };
 
   render() {
     return (
-      <form
-        onSubmit={this.props.handleSubmit(this.onSubmit)}
-        className="ui form error"
-      >
-        <Field name="title" component={this.renderInput} label="Enter Title" />
-        <Field
-          name="description"
-          component={this.renderInput}
-          label="Enter Description"
-        />
-        <button className="ui button primary">Submit</button>
-      </form>
+        <form
+          onSubmit={this.props.handleSubmit(this.onSubmit)}
+          className="ui form error"
+        >
+          <Field
+            name="title"
+            component={this.renderInput}
+            label="Enter Title"
+          />
+          <Field
+            name="description"
+            component={this.renderInput}
+            label="Enter Description"
+          />
+          <button className="ui button primary">Submit</button>
+        </form>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return { userId: state.auth.userId, userInstance: state.auth.userInstance }
-}
+  return { userId: state.auth.userId, userInstance: state.auth.userInstance };
+};
 
 const validate = (formValues) => {
   const errors = {};
