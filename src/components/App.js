@@ -7,8 +7,42 @@ import StreamEdit from "./streams/StreamEdit";
 import StreamList from "./streams/StreamList";
 import StreamShow from "./streams/StreamShow";
 import EditProfile from "./user/EditProfile";
+import StreamOwned from "./streams/StreamOwned";
 
-const App = () => {
+import { connect } from "react-redux";
+
+const App = (props) => {
+  const ifSignedIn = () => {
+    if (props.isSignedIn) {
+      return (
+        <>
+          <Route
+            path="/streams/owned"
+            exact
+            render={({ history }) => <StreamOwned history={history} />}
+          />
+          <Route
+            path="/streams/new"
+            exact
+            render={({ history }) => <StreamCreate history={history} />}
+          />
+          <Route
+            path="/streams/edit/:id"
+            exact
+            render={({ history, location }) => (
+              <StreamEdit location={location} history={history} />
+            )}
+          />
+          <Route
+            path="/profile/edit/:id"
+            exact
+            render={({ history }) => <EditProfile />}
+          />
+        </>
+      );
+    }
+  };
+
   return (
     <>
       <BrowserRouter>
@@ -22,30 +56,13 @@ const App = () => {
               render={({ history }) => <StreamList history={history} />}
             />
             <Route
-              path="/streams/new"
-              exact
-              render={({ history }) => <StreamCreate history={history} />}
-            />
-            <Route
-              path="/streams/edit/:id"
-              exact
-              render={({ history, location }) => (
-                <StreamEdit location={location} history={history} />
-              )}
-            />
-
-            <Route
               path="/streams/show/:id"
               exact
               render={({ history, location }) => (
                 <StreamShow location={location} />
               )}
             />
-            <Route
-              path="/profile/edit/:id"
-              exact
-              render={({ history }) => <EditProfile />}
-            />
+            {ifSignedIn()}
           </div>
         </div>
       </BrowserRouter>
@@ -53,4 +70,8 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return { isSignedIn: state.auth.isSignedIn };
+};
+
+export default connect(mapStateToProps)(App);

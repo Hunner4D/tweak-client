@@ -12,8 +12,7 @@ class Header extends React.Component {
     let current = this.props.history.location.pathname;
     if (guide[current]) {
       this.setState({ activeItem: guide[current] });
-    }
-    else {
+    } else {
       this.setState({ activeItem: null });
     }
   }
@@ -28,19 +27,29 @@ class Header extends React.Component {
       case "create stream":
         this.props.history.push("/streams/new");
         break;
+      case "my streams":
+        this.props.history.push("/streams/owned");
+        break;
       default:
         break;
     }
   };
 
-  renderCreate(activeItem) {
+  renderIfSignedIn(activeItem) {
     if (this.props.isSignedIn) {
       return (
-        <Menu.Item
-          name="create stream"
-          active={activeItem === "create stream"}
-          onClick={this.handleItemClick}
-        />
+        <>
+          <Menu.Item
+            name="my streams"
+            active={activeItem === "my streams"}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="create stream"
+            active={activeItem === "create stream"}
+            onClick={this.handleItemClick}
+          />
+        </>
       );
     }
   }
@@ -55,17 +64,12 @@ class Header extends React.Component {
             active={activeItem === "streams"}
             onClick={this.handleItemClick}
           />
+          {this.renderIfSignedIn(activeItem)}
           <Menu.Item
-            name="messages"
-            active={activeItem === "messages"}
+            name="about"
+            active={activeItem === "about"}
             onClick={this.handleItemClick}
           />
-          <Menu.Item
-            name="friends"
-            active={activeItem === "friends"}
-            onClick={this.handleItemClick}
-          />
-          {this.renderCreate(activeItem)}
           <Menu.Menu position="right">
             <Menu.Item>
               <Input icon="search" placeholder="Search..." />

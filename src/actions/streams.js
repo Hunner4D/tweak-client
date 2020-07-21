@@ -6,8 +6,8 @@ export const fetchStream = (id, query) => async (dispatch) => {
   dispatch({ type: "FETCH_STREAM", payload: response.data });
 };
 
-export const fetchMultipleStreams = (query) => async (dispatch) => {
-  const response = await server.get("/streams", query);
+export const fetchMultipleStreams = () => async (dispatch) => {
+  const response = await server.get("/streams");
 
   dispatch({ type: "FETCH_STREAMS", payload: response.data });
 };
