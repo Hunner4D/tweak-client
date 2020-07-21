@@ -19,10 +19,11 @@ export const createStream = (query, history) => async (dispatch) => {
   history.push("/");
 };
 
-export const editStream = (id, query) => async (dispatch) => {
+export const editStream = (id, query, history) => async (dispatch) => {
   const response = await server.put(`/streams/${id}`, query);
-
-  dispatch({ type: "EDIT_STREAM", payload: response.data });
+  console.log(response)
+  // await dispatch({ type: "EDIT_STREAM", payload: response.data });
+  history.push("/")
 };
 
 export const deleteStream = (query) => async (dispatch) => {

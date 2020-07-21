@@ -31,7 +31,7 @@ const App = () => {
               path="/streams/edit/:id"
               exact
               render={({ history, location }) => (
-                <StreamEdit location={location} />
+                <StreamEdit location={location} history={history} />
               )}
             />
             <Route

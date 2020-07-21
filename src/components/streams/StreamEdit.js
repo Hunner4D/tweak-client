@@ -11,6 +11,7 @@ import {
   Icon,
 } from "semantic-ui-react";
 import { connect } from "react-redux";
+import { editStream } from "../../actions/streams";
 
 const StreamEdit = (props) => {
   const [formData, setFormData] = useState({
@@ -19,16 +20,30 @@ const StreamEdit = (props) => {
     modalOpen: false,
   });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setFormData({ ...formData, modalOpen: true });
-  };
-
   const handleChange = (event) => {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const triggerConfirm = (event) => {
+    event.preventDefault();
+    setFormData({ ...formData, modalOpen: true });
+  };
+
+  const handleSubmit = () => {
+    let query = {
+      userId: props.auth.userId,
+      userInstance: props.auth.userInstance,
+      formInfo: {
+        title: formData.title,
+        description: formData.description,
+        streamId: props.location.state.uuid,
+      },
+    };
+    console.log("awww shieeeee queery heeereee bitttchhhh", query);
+    props.editStream(query.formInfo.streamId, query, props.history);
   };
 
   const renderPopUp = () => {
@@ -42,8 +57,7 @@ const StreamEdit = (props) => {
         <Header icon="write" content="Done Editing?" />
         <Modal.Content>
           <p>
-            Are you sure you would like to finish edits for{" "}
-            {props.location.state.title} ?
+            Are you sure you would like to finish edits for {formData.title}?
           </p>
         </Modal.Content>
         <Modal.Actions>
@@ -55,7 +69,7 @@ const StreamEdit = (props) => {
           >
             <Icon name="remove" /> No
           </Button>
-          <Button color="green" inverted>
+          <Button color="green" inverted onClick={handleSubmit}>
             <Icon name="checkmark" /> Yes
           </Button>
         </Modal.Actions>
@@ -93,7 +107,7 @@ const StreamEdit = (props) => {
       <Grid columns={3} divided="vertically">
         <Grid.Row stretched>
           <Grid.Column>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={triggerConfirm}>
               <Segment size="massive">
                 <Input
                   type="text"
@@ -158,4 +172,4 @@ const mapStateToProps = (state, ownProps) => {
   return { auth: state.auth, ownProps };
 };
 
-export default connect(mapStateToProps)(StreamEdit);
+export default connect(mapStateToProps, { editStream })(StreamEdit);
