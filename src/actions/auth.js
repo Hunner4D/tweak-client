@@ -6,18 +6,15 @@ import server from "../apis/server";
 // let decoded = Base64.atob(bytes);
 
 export const signIn = (query) => async (dispatch) => {
-  let bytes = Base64.encode(query.id);
   let response = (
-    await server.post("/user", {
-      bytes,
-      username: query.username,
-      profileImage: query.profileImage,
-    })
+    await server.post("/user", {idToken: query})
   ).data;
+
   dispatch({
     type: "SIGN_IN",
     payload: {
-      bytes,
+      // userId: response.userId,
+      token: query,
       userInstance: response.instance,
       username: response.username,
       profileImage: response.profileImage,

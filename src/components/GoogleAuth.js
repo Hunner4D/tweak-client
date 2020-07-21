@@ -16,8 +16,7 @@ class GoogleAuth extends React.Component {
         })
         .then(() => {
           this.auth = window.gapi.auth2.getAuthInstance();
-          // this.profile = window.gapi.auth2.BasicProfile;
-          // console.log(window.gapi.auth2.BasicProfile.getName())
+          // this.auth.signOut();
           this.onAuthChange(this.auth.isSignedIn.get());
           this.auth.isSignedIn.listen(this.onAuthChange);
         });
@@ -25,19 +24,10 @@ class GoogleAuth extends React.Component {
   }
 
   onAuthChange = async (isSignedIn) => {
-    let user = await this.auth.currentUser.get();
-    // console.log(user); 
-    console.log(user[Object.keys(user)[1]])
-    let profileInfo = user[Object.keys(user)[2]];
-    
-    if (isSignedIn && user) {
-      let id = user[Object.keys(user)[0]];
-      // console.log("id: ", id)
-      let username = profileInfo[Object.keys(profileInfo)[1]];
-      // console.log("username: ", username)
-      let profileImage = profileInfo[Object.keys(profileInfo)[4]];
-      // console.log("profileImage: ", profileImage)
-      this.props.signIn({ id, username, profileImage });
+    if (isSignedIn) {
+      let user = await this.auth.currentUser.get();
+      let idToken = user[Object.keys(user)[1]].id_token;
+      this.props.signIn(idToken);
     } else {
       this.props.signOut();
     }

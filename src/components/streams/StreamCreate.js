@@ -22,7 +22,7 @@ class StreamCreate extends React.Component {
 
   onSubmit = (formValues) => {
     let query = {
-      userId: this.props.userId,
+      idToken: this.props.token,
       userInstance: this.props.userInstance,
       ...formValues,
     };
@@ -52,7 +52,7 @@ class StreamCreate extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { userId: state.auth.userId, userInstance: state.auth.userInstance };
+  return { token: state.auth.token, userInstance: state.auth.userInstance };
 };
 
 const validate = (formValues) => {

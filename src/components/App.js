@@ -3,7 +3,6 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Header from "./Header";
 import PopUp from "./Popup";
 import StreamCreate from "./streams/StreamCreate";
-import StreamDelete from "./streams/StreamDelete";
 import StreamEdit from "./streams/StreamEdit";
 import StreamList from "./streams/StreamList";
 import StreamShow from "./streams/StreamShow";
@@ -34,13 +33,7 @@ const App = () => {
                 <StreamEdit location={location} history={history} />
               )}
             />
-            <Route
-              path="/streams/delete/:id"
-              exact
-              render={({ history, location }) => (
-                <StreamDelete location={location} />
-              )}
-            />
+
             <Route
               path="/streams/show/:id"
               exact
