@@ -20,18 +20,14 @@ export const fetchMyStreams = (idToken, userInstance) => async (dispatch) => {
   dispatch({ type: "FETCH_MY_STREAMS", payload: response.data });
 };
 
-export const createStream = (query, history) => async (dispatch) => {
+export const createStream = (query) => async (dispatch) => {
   const response = await server.post("/streams", query);
 
   await dispatch({ type: "CREATE_STREAM", payload: response.data });
-  history.push("/");
 };
 
-export const editStream = (id, query, history) => async (dispatch) => {
-  const response = await server.put(`/streams/${id}`, query);
-  console.log(response);
-  // await dispatch({ type: "EDIT_STREAM", payload: response.data });
-  history.push("/");
+export const editStream = (query) => async (dispatch) => {
+  await server.put("/streams", query);
 };
 
 export const deleteStream = (query) => async (dispatch) => {

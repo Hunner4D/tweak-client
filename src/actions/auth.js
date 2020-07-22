@@ -13,7 +13,6 @@ export const signIn = (query) => async (dispatch) => {
   dispatch({
     type: "SIGN_IN",
     payload: {
-      // userId: response.userId,
       token: query,
       userInstance: response.instance,
       username: response.username,

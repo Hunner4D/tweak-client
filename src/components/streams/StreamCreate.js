@@ -1,6 +1,5 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import { Container } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { createStream } from "../../actions/streams";
 import { changePath } from "../../actions/header";
@@ -21,14 +20,15 @@ class StreamCreate extends React.Component {
     );
   }
 
-  onSubmit = (formValues) => {
+  onSubmit = async (formValues) => {
     let query = {
       idToken: this.props.token,
       userInstance: this.props.userInstance,
       ...formValues,
     };
-    this.props.createStream(query, this.props.history);
-    this.props.changePath("/");
+    await this.props.createStream(query);
+    this.props.changePath("/streams/owned");
+    this.props.history.push("/streams/owned");
   };
 
   render() {

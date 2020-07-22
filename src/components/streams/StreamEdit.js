@@ -12,6 +12,7 @@ import {
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { editStream } from "../../actions/streams";
+import { changePath } from "../../actions/header";
 
 const StreamEdit = (props) => {
   const [formData, setFormData] = useState({
@@ -32,18 +33,19 @@ const StreamEdit = (props) => {
     setFormData({ ...formData, modalOpen: true });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     let query = {
-      userId: props.auth.userId,
-      userInstance: props.auth.userInstance,
+      idToken: props.token,
+      userInstance: props.userInstance,
+      streamId: props.location.state.uuid,
       formInfo: {
         title: formData.title,
         description: formData.description,
-        streamId: props.location.state.uuid,
       },
     };
-    console.log("awww shieeeee queery heeereee bitttchhhh", query);
-    props.editStream(query.formInfo.streamId, query, props.history);
+    await props.editStream(query);
+    props.changePath("/streams/owned");
+    props.history.push("/streams/owned");
   };
 
   const renderPopUp = () => {
@@ -168,8 +170,8 @@ const StreamEdit = (props) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return { auth: state.auth, ownProps };
+const mapStateToProps = (state) => {
+  return { token: state.auth.token, userInstance: state.auth.userInstance };
 };
 
-export default connect(mapStateToProps, { editStream })(StreamEdit);
+export default connect(mapStateToProps, { editStream, changePath })(StreamEdit);
