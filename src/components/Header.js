@@ -21,12 +21,16 @@ class Header extends React.Component {
         this.props.changePath("/streams/owned");
         this.props.history.push("/streams/owned");
         break;
+      case "profile":
+        this.props.changePath("/profile/edit");
+        this.props.history.push("/profile/edit");
+        break;
       default:
         break;
     }
   };
 
-  renderIfSignedIn() {
+  renderIfSignedInLeft() {
     if (this.props.isSignedIn) {
       return (
         <>
@@ -45,6 +49,20 @@ class Header extends React.Component {
     }
   }
 
+  renderIfSignedInRight() {
+    if (this.props.isSignedIn) {
+      return (
+        <>
+          <Menu.Item
+            name="profile"
+            active={this.props.activeItem === "profile"}
+            onClick={this.handleItemClick}
+          />
+        </>
+      );
+    }
+  }
+
   render() {
     return (
       <div>
@@ -54,7 +72,7 @@ class Header extends React.Component {
             active={this.props.activeItem === "streams"}
             onClick={this.handleItemClick}
           />
-          {this.renderIfSignedIn()}
+          {this.renderIfSignedInLeft()}
           <Menu.Item
             name="about"
             active={this.props.activeItem === "about"}
@@ -64,6 +82,7 @@ class Header extends React.Component {
             <Menu.Item>
               <Input icon="search" placeholder="Search..." />
             </Menu.Item>
+            {this.renderIfSignedInRight()}
             <GoogleAuth />
           </Menu.Menu>
         </Menu>

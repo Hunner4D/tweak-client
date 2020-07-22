@@ -34,9 +34,11 @@ const App = (props) => {
             )}
           />
           <Route
-            path="/profile/edit/:id"
+            path="/profile/edit"
             exact
-            render={({ history }) => <EditProfile />}
+            render={({ history, location }) => (
+              <EditProfile location={location} />
+            )}
           />
         </>
       );
@@ -48,7 +50,9 @@ const App = (props) => {
       <BrowserRouter>
         <div>
           <PopUp />
-          <Route render={({ history, location }) => <Header history={history}/>} />
+          <Route
+            render={({ history, location }) => <Header history={history} />}
+          />
           <div className="ui container">
             <Route
               path="/"
