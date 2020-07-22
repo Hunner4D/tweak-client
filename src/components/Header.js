@@ -2,32 +2,23 @@ import React from "react";
 import GoogleAuth from "./GoogleAuth";
 import { Menu, Input } from "semantic-ui-react";
 
+import { changePath } from "../actions/header";
 import { connect } from "react-redux";
 
 class Header extends React.Component {
-  state = { activeItem: "streams" };
-
-  componentDidMount() {
-    const guide = { "/": "streams" };
-    let current = this.props.history.location.pathname;
-    if (guide[current]) {
-      this.setState({ activeItem: guide[current] });
-    } else {
-      this.setState({ activeItem: null });
-    }
-  }
 
   handleItemClick = (e, { name }) => {
-    this.setState({ activeItem: name });
-
     switch (name) {
       case "streams":
+        this.props.changePath("/");
         this.props.history.push("/");
         break;
       case "create stream":
+        this.props.changePath("/streams/new");
         this.props.history.push("/streams/new");
         break;
       case "my streams":
+        this.props.changePath("/streams/owned");
         this.props.history.push("/streams/owned");
         break;
       default:
@@ -35,18 +26,18 @@ class Header extends React.Component {
     }
   };
 
-  renderIfSignedIn(activeItem) {
+  renderIfSignedIn() {
     if (this.props.isSignedIn) {
       return (
         <>
           <Menu.Item
             name="my streams"
-            active={activeItem === "my streams"}
+            active={this.props.activeItem === "my streams"}
             onClick={this.handleItemClick}
           />
           <Menu.Item
             name="create stream"
-            active={activeItem === "create stream"}
+            active={this.props.activeItem === "create stream"}
             onClick={this.handleItemClick}
           />
         </>
@@ -55,19 +46,18 @@ class Header extends React.Component {
   }
 
   render() {
-    const { activeItem } = this.state;
     return (
       <div>
         <Menu pointing secondary>
           <Menu.Item
             name="streams"
-            active={activeItem === "streams"}
+            active={this.props.activeItem === "streams"}
             onClick={this.handleItemClick}
           />
-          {this.renderIfSignedIn(activeItem)}
+          {this.renderIfSignedIn()}
           <Menu.Item
             name="about"
-            active={activeItem === "about"}
+            active={this.props.activeItem === "about"}
             onClick={this.handleItemClick}
           />
           <Menu.Menu position="right">
@@ -84,7 +74,10 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { isSignedIn: state.auth.isSignedIn };
+  return {
+    isSignedIn: state.auth.isSignedIn,
+    activeItem: state.header.activeItem,
+  };
 };
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { changePath })(Header);

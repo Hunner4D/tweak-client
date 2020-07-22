@@ -1,8 +1,9 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import { Container } from 'semantic-ui-react'
+import { Container } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { createStream } from "../../actions/streams";
+import { changePath } from "../../actions/header";
 
 class StreamCreate extends React.Component {
   renderInput({ input, label, meta }) {
@@ -27,26 +28,23 @@ class StreamCreate extends React.Component {
       ...formValues,
     };
     this.props.createStream(query, this.props.history);
+    this.props.changePath("/");
   };
 
   render() {
     return (
-        <form
-          onSubmit={this.props.handleSubmit(this.onSubmit)}
-          className="ui form error"
-        >
-          <Field
-            name="title"
-            component={this.renderInput}
-            label="Enter Title"
-          />
-          <Field
-            name="description"
-            component={this.renderInput}
-            label="Enter Description"
-          />
-          <button className="ui button primary">Submit</button>
-        </form>
+      <form
+        onSubmit={this.props.handleSubmit(this.onSubmit)}
+        className="ui form error"
+      >
+        <Field name="title" component={this.renderInput} label="Enter Title" />
+        <Field
+          name="description"
+          component={this.renderInput}
+          label="Enter Description"
+        />
+        <button className="ui button primary">Submit</button>
+      </form>
     );
   }
 }
@@ -73,4 +71,6 @@ const formWrapped = reduxForm({
   validate: validate,
 })(StreamCreate);
 
-export default connect(mapStateToProps, { createStream })(formWrapped);
+export default connect(mapStateToProps, { createStream, changePath })(
+  formWrapped
+);

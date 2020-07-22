@@ -12,6 +12,14 @@ export const fetchMultipleStreams = () => async (dispatch) => {
   dispatch({ type: "FETCH_STREAMS", payload: response.data });
 };
 
+export const fetchMyStreams = (idToken, userInstance) => async (dispatch) => {
+  const response = await server.post(`/streams/my/streams`, {
+    idToken,
+    userInstance,
+  });
+  dispatch({ type: "FETCH_MY_STREAMS", payload: response.data });
+};
+
 export const createStream = (query, history) => async (dispatch) => {
   const response = await server.post("/streams", query);
 
@@ -21,18 +29,13 @@ export const createStream = (query, history) => async (dispatch) => {
 
 export const editStream = (id, query, history) => async (dispatch) => {
   const response = await server.put(`/streams/${id}`, query);
-  console.log(response)
+  console.log(response);
   // await dispatch({ type: "EDIT_STREAM", payload: response.data });
-  history.push("/")
+  history.push("/");
 };
 
 export const deleteStream = (query) => async (dispatch) => {
-  console.log("delete action hit: ", query);
-  await server
-    .delete(
-      `/streams/${query.streamId}/${query.userId}/${query.userInstance}`,
-      query
-    )
-    .then(() => dispatch({ type: "DELETE_STREAM", payload: query.streamId }))
-    .catch((err) => console.log("there was an error: ", err));
+  await server.delete("/streams", {data: query})
+  .then(() => dispatch({ type: "DELETE_STREAM", payload: query.streamId }))
+  .catch((err) => console.log("there was an error deleting stream"));
 };

@@ -48,7 +48,7 @@ const App = (props) => {
       <BrowserRouter>
         <div>
           <PopUp />
-          <Route render={({ history }) => <Header history={history} />} />
+          <Route render={({ history, location }) => <Header history={history}/>} />
           <div className="ui container">
             <Route
               path="/"

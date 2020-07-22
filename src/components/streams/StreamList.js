@@ -11,7 +11,12 @@ class StreamList extends React.Component {
   }
 
   renderStreams() {
-    if (this.props.streams && Array.isArray(this.props.streams)) {
+    if (
+      this.props.streams &&
+      Array.isArray(this.props.streams) &&
+      !this.props.streams.includes(null) &&
+      this.props.streams.length
+    ) {
       return (
         <Card.Group itemsPerRow={4}>
           {this.props.streams.map((stream, idx) => {
@@ -38,16 +43,14 @@ class StreamList extends React.Component {
                   </Link>
                   <Card.Description>{stream.description}</Card.Description>
                 </Card.Content>
-                <Card.Content extra>
-                  Hosted by {stream.owner}
-                </Card.Content>
+                <Card.Content extra>Hosted by {stream.owner}</Card.Content>
               </Card>
             );
           })}
         </Card.Group>
       );
     } else {
-      return <span>no streams found</span>;
+      return <span>No Streams Found</span>;
     }
   }
 

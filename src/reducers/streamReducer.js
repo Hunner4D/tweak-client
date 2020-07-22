@@ -8,6 +8,9 @@ export default (state = [], action) => {
     case "FETCH_STREAM":
       return { ...state, [action.payload.id]: action.payload };
 
+    case "FETCH_MY_STREAMS":
+      return action.payload;
+
     case "CREATE_STREAM":
       return { ...state, [action.payload.id]: action.payload };
 
