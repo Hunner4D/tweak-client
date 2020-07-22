@@ -1,5 +1,6 @@
 import server from "../apis/server";
 
+
 export const fetchStream = (id, query) => async (dispatch) => {
   const response = await server.get(`/streams/${id}`, query);
 
