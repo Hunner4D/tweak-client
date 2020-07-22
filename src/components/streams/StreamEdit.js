@@ -160,6 +160,7 @@ const StreamEdit = (props) => {
           </Grid.Column>
           <Grid.Column width={12}>
             <Segment>{renderFeed()}</Segment>
+            <Segment>{props.location.state.stream_key}</Segment>
           </Grid.Column>
           <Grid.Column width={2}>
             <div></div>

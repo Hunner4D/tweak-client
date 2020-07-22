@@ -14,7 +14,7 @@ const EditProfile = (props) => {
   return (
     <>
       <h1>EditProfile</h1>
-      <div>{props.stream_key}</div>
+      {/* <div>{props.stream_key}</div> */}
       <button onClick={generateNewKey}>generate new stream key</button>
     </>
   );

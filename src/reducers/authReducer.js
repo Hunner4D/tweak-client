@@ -5,13 +5,12 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "SIGN_IN":
-      const { token, userInstance, stream_key, username, profileImage, newUser } = action.payload;
+      const { token, userInstance, username, profileImage, newUser } = action.payload;
       return {
         ...state,
         isSignedIn: true,
         token,
         userInstance,
-        stream_key,
         username,
         profileImage,
         newUser,
