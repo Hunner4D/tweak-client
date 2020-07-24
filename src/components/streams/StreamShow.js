@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Segment, Feed, Container } from "semantic-ui-react";
 import { connect } from "react-redux";
+import VideoPlayer from "./VideoPlayer";
 
 const StreamShow = (props) => {
   const renderFeed = () => {
@@ -43,7 +44,9 @@ const StreamShow = (props) => {
             <Segment size="big">{props.location.state.description}</Segment>
           </Grid.Column>
           <Grid.Column>
-            <Segment size="massive">1</Segment>
+            <Segment size="massive">
+              {/* <VideoPlayer uuid={props.location.state.uuid}/> */}
+            </Segment>
           </Grid.Column>
           <Grid.Column>
             <Segment>1</Segment>
@@ -67,6 +70,7 @@ const StreamShow = (props) => {
           </Grid.Column>
         </Grid.Row>
       </Grid>
+      <VideoPlayer uuid={props.location.state.uuid}/>
     </>
   );
 };
