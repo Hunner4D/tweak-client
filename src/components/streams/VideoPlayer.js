@@ -40,14 +40,16 @@ class VideoPlayer extends React.Component {
     return (
       <>
         {this.state.stream ? (
-          <div data-vjs-player>
-            <video
-              ref={(node) => (this.videoNode = node)}
-              className="video-js vjs-big-play-centered"
-            />
+          <div>
+            <div data-vjs-player>
+              <video
+                ref={(node) => (this.videoNode = node)}
+                className="video-js vjs-big-play-centered"
+              />
+            </div>
           </div>
         ) : (
-          " Loading ... "
+          <span>" Loading ... "</span>
         )}
       </>
     );

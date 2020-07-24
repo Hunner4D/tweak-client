@@ -10,7 +10,7 @@ const StreamShow = (props) => {
         <Feed>
           <Feed.Event>
             <Feed.Label>
-              <img src="/images/avatar/small/elliot.jpg" />
+              <img src="/images/avatar/small/elliot.jpg" alt="avatar"/>
             </Feed.Label>
             <Feed.Content>
               <Feed.Summary>

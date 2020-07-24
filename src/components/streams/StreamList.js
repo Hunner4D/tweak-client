@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card, Button, Modal, Header, Icon } from "semantic-ui-react";
+import { Card } from "semantic-ui-react";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { fetchMultipleStreams, deleteStream } from "../../actions/streams";
