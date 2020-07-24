@@ -8,8 +8,8 @@ export const fetchStream = (id, query) => async (dispatch) => {
 };
 
 export const fetchMultipleStreams = () => async (dispatch) => {
-  const response = await server.get("/streams");
-
+  const response = await server.get("/rtmp");
+  
   dispatch({ type: "FETCH_STREAMS", payload: response.data });
 };
 

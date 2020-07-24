@@ -66,7 +66,7 @@ class StreamCreate extends React.Component {
           to Live stream. If you're using OBS, go to Settings > Stream and
           select Custom from service dropdown. Enter{" "}
           <b>rtmp://127.0.0.1:1935/live</b> in server input field. Also, add
-          your stream key. Click apply to save.
+          your stream key for a given stream found in "My Streams".
         </p>
       </>
     );

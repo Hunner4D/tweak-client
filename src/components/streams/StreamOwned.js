@@ -17,7 +17,7 @@ class StreamList extends React.Component {
   handleOpen = (idx) => this.setState({ modalOpen: true, modalNum: idx });
   handleClose = (idx) => this.setState({ modalOpen: false, modalNum: null });
 
-  ifStreamOwner(stream, idx) {
+  streamOwner(stream, idx) {
     return (
       <Card.Content extra>
         <div className="ui two buttons">
@@ -32,7 +32,7 @@ class StreamList extends React.Component {
               }}
               style={{ color: "green", opacity: "0.6" }}
             >
-              Edit Stream
+              Start / Edit Stream
             </Link>
           </Button>
           <Modal
@@ -107,7 +107,7 @@ class StreamList extends React.Component {
                   <Card.Description>{stream.description}</Card.Description>
                 </Card.Content>
 
-                {this.ifStreamOwner(stream, idx)}
+                {this.streamOwner(stream, idx)}
               </Card>
             );
           })}

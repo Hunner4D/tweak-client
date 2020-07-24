@@ -3,13 +3,15 @@ import {
   Grid,
   Segment,
   Feed,
-  Container,
+  Image,
   Input,
   Modal,
   Button,
   Header,
   Icon,
+  Popup,
 } from "semantic-ui-react";
+import copy from "copy-to-clipboard";
 import { connect } from "react-redux";
 import { editStream } from "../../actions/streams";
 import { changePath } from "../../actions/header";
@@ -19,6 +21,7 @@ const StreamEdit = (props) => {
     title: props.location.state.title,
     description: props.location.state.description,
     modalOpen: false,
+    copyPopUp: false,
   });
 
   const handleChange = (event) => {
@@ -48,7 +51,19 @@ const StreamEdit = (props) => {
     props.history.push("/streams/owned");
   };
 
-  const renderPopUp = () => {
+  const handleCopyOpen = () => {
+    setFormData({ ...formData, copyPopUp: true });
+
+    setTimeout(() => {
+      setFormData({ copyPopUp: false });
+    }, 2000);
+  };
+
+  const handleCopyClose = () => {
+    setFormData({ ...formData, copyPopUp: false });
+  };
+
+  const renderEditPopUp = () => {
     return (
       <Modal
         basic
@@ -79,30 +94,70 @@ const StreamEdit = (props) => {
     );
   };
 
-  const renderFeed = () => {
+  const renderStartStream = () => {
     return (
-      <Container textAlign="center">
-        <Feed>
-          <Feed.Event>
-            <Feed.Label>
-              <img src="/images/avatar/small/elliot.jpg" />
-            </Feed.Label>
-            <Feed.Content>
-              <Feed.Summary>
-                <Feed.User>Elliot Fu</Feed.User> this stream fucking sucks
-                <Feed.Date>1 Hour Ago</Feed.Date>
-              </Feed.Summary>
-              {/* <Feed.Meta>
-              <Feed.Like>
-                <Icon name="like" />4 Likes
-              </Feed.Like>
-            </Feed.Meta> */}
-            </Feed.Content>
-          </Feed.Event>
-        </Feed>
-      </Container>
+      <Modal trigger={<Button fluid>Start Stream with Stream Key</Button>}>
+        <Modal.Content image>
+        <Image
+          wrapped
+          size="medium"
+          floated={"right"}
+          rounded
+          src={props.profileImage}
+        />
+          <Modal.Description>
+            <Header>You're all set!</Header>
+            <p>Use the following key to connect to your stream: </p>{" "}
+            <Popup
+              trigger={
+                <Button
+                  icon
+                  labelPosition="right"
+                  onClick={(e) => {
+                    copy(props.location.state.stream_key);
+                  }}
+                >
+                  Stream Key
+                  <Icon name="copy" />
+                </Button>
+              }
+              content="Copied to Clipboard!"
+              on="click"
+              open={formData.copyPopUp}
+              onClose={handleCopyClose}
+              onOpen={handleCopyOpen}
+              position="bottom right"
+            />
+          </Modal.Description>
+        </Modal.Content>
+      </Modal>
     );
   };
+
+  // const renderFeed = () => {
+  //   return (
+  //     <Container textAlign="center">
+  //       <Feed>
+  //         <Feed.Event>
+  //           <Feed.Label>
+  //             <img src="/images/avatar/small/elliot.jpg" />
+  //           </Feed.Label>
+  //           <Feed.Content>
+  //             <Feed.Summary>
+  //               <Feed.User>Elliot Fu</Feed.User> this stream fucking sucks
+  //               <Feed.Date>1 Hour Ago</Feed.Date>
+  //             </Feed.Summary>
+  //             {/* <Feed.Meta>
+  //             <Feed.Like>
+  //               <Icon name="like" />4 Likes
+  //             </Feed.Like>
+  //           </Feed.Meta> */}
+  //           </Feed.Content>
+  //         </Feed.Event>
+  //       </Feed>
+  //     </Container>
+  //   );
+  // };
 
   return (
     <>
@@ -150,17 +205,15 @@ const StreamEdit = (props) => {
           </Grid.Column>
         </Grid.Row>
       </Grid>
-      {/*  */}
-      <div>{renderPopUp()}</div>
-      {/*  */}
+      <div>{renderEditPopUp()}</div>
       <Grid columns={3} divided>
         <Grid.Row>
           <Grid.Column width={2}>
             <div></div>
           </Grid.Column>
           <Grid.Column width={12}>
-            <Segment>{renderFeed()}</Segment>
-            <Segment>{props.location.state.stream_key}</Segment>
+            {renderStartStream()}
+            {/* <Segment>{renderFeed()}</Segment> */}
           </Grid.Column>
           <Grid.Column width={2}>
             <div></div>
@@ -172,7 +225,11 @@ const StreamEdit = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return { token: state.auth.token, userInstance: state.auth.userInstance };
+  return {
+    token: state.auth.token,
+    userInstance: state.auth.userInstance,
+    profileImage: state.auth.profileImage,
+  };
 };
 
 export default connect(mapStateToProps, { editStream, changePath })(StreamEdit);
