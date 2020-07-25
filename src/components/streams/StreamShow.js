@@ -10,7 +10,7 @@ const StreamShow = (props) => {
         <Feed>
           <Feed.Event>
             <Feed.Label>
-              <img src="/images/avatar/small/elliot.jpg" />
+              <img src="/images/avatar/small/elliot.jpg" alt="avatar"/>
             </Feed.Label>
             <Feed.Content>
               <Feed.Summary>
@@ -45,7 +45,7 @@ const StreamShow = (props) => {
           </Grid.Column>
           <Grid.Column>
             <Segment size="massive">
-              {/* <VideoPlayer uuid={props.location.state.uuid}/> */}
+              <VideoPlayer uuid={props.location.state.uuid}/>
             </Segment>
           </Grid.Column>
           <Grid.Column>
@@ -70,7 +70,7 @@ const StreamShow = (props) => {
           </Grid.Column>
         </Grid.Row>
       </Grid>
-      <VideoPlayer uuid={props.location.state.uuid}/>
+      {/* <VideoPlayer uuid={props.location.state.uuid}/> */}
     </>
   );
 };

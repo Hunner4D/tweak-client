@@ -5,8 +5,15 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { fetchMyStreams, deleteStream } from "../../actions/streams";
 
-class StreamList extends React.Component {
-  state = { modalOpen: false, modalNum: null };
+class StreamsOwned extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      modalOpen: false,
+      modalNum: null,
+    };
+  }
 
   componentDidMount() {
     let idToken = this.props.token;
@@ -137,5 +144,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { fetchMyStreams, deleteStream })(
-  StreamList
+  StreamsOwned
 );

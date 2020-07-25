@@ -1,4 +1,3 @@
-import { Base64 } from "js-base64";
 import server from "../apis/server";
 
 //          encoding guide

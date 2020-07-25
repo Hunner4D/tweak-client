@@ -1,55 +1,50 @@
 import React from "react";
-import videojs from "video.js";
 import server from "../../apis/server";
+import flv from "flv.js";
 
 class VideoPlayer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      stream: false,
-    };
+    this.videoRef = React.createRef();
   }
 
   componentDidMount() {
-    server
-      .get(`/rtmp/${this.props.uuid}`)
-      .then((res) => {
-        console.log(res.data);
-        // this.setState({ stream: true });
-        this.player = videojs(
-          this.videoNode,
-          res.data,
-          function onPlayerReady() {
-            console.log("onPlayerReady", this);
-          }
-        );
-      })
-      .then(() => {
-        this.setState({ stream: true });
-      });
+    this.buildPlayer();
+  }
+
+  componentDidUpdate() {
+    this.buildPlayer();
   }
 
   componentWillUnmount() {
-    if (this.player) {
-      this.player.dispose();
+    this.player.destroy();
+  }
+
+  buildPlayer() {
+    if (this.player || !this.props.uuid) {
+      return;
     }
+
+    server.get(`/rtmp/${this.props.uuid}`).then((res) => {
+      this.player = flv.createPlayer({
+        type: "flv",
+        url: res.data,
+      });
+      this.player.attachMediaElement(this.videoRef.current);
+      this.player.load();
+    });
   }
 
   render() {
+    if (!this.props.uuid) {
+      return <div>loading...</div>;
+    }
+
     return (
-      <>
-        {this.state.stream ? (
-          <div data-vjs-player>
-            <video
-              ref={(node) => (this.videoNode = node)}
-              className="video-js vjs-big-play-centered"
-            />
-          </div>
-        ) : (
-          " Loading ... "
-        )}
-      </>
+      <div>
+        <video ref={this.videoRef} style={{ width: "100%" }} controls />
+      </div>
     );
   }
 }

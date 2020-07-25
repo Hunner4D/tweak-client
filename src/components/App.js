@@ -7,7 +7,7 @@ import StreamEdit from "./streams/StreamEdit";
 import StreamList from "./streams/StreamList";
 import StreamShow from "./streams/StreamShow";
 import EditProfile from "./user/EditProfile";
-import StreamOwned from "./streams/StreamOwned";
+import StreamsOwned from "./streams/StreamOwned";
 
 import { connect } from "react-redux";
 
@@ -19,7 +19,7 @@ const App = (props) => {
           <Route
             path="/streams/owned"
             exact
-            render={({ history }) => <StreamOwned history={history} />}
+            render={({ history }) => <StreamsOwned history={history} />}
           />
           <Route
             path="/streams/new"
