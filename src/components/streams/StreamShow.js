@@ -45,7 +45,7 @@ const StreamShow = (props) => {
           </Grid.Column>
           <Grid.Column>
             <Segment size="massive">
-              {/* <VideoPlayer uuid={props.location.state.uuid}/> */}
+              <VideoPlayer uuid={props.location.state.uuid}/>
             </Segment>
           </Grid.Column>
           <Grid.Column>
@@ -70,7 +70,7 @@ const StreamShow = (props) => {
           </Grid.Column>
         </Grid.Row>
       </Grid>
-      <VideoPlayer uuid={props.location.state.uuid}/>
+      {/* <VideoPlayer uuid={props.location.state.uuid}/> */}
     </>
   );
 };
