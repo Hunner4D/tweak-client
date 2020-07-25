@@ -1,50 +1,41 @@
 import React from "react";
-import videojs from "video.js";
-import { HlsSourceHandler } from 'videojs-contrib-hls';
 import server from "../../apis/server";
+import Hls from "hls.js";
 
 class VideoPlayer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      stream: false,
-    };
+    this.hls = new Hls();
   }
 
   componentDidMount() {
     server.get(`/rtmp/${this.props.uuid}`).then((res) => {
-      console.log(res.data);
-      this.setState({ stream: true });
-      videojs.getTech('html5').registerSourceHandler(HlsSourceHandler('html5'), 0);
-      
-      this.player = videojs(this.videoNode, res.data, function onPlayerReady() {
-        console.log("onPlayerReady", this);
-      });
-    });
-  }
+      const video = this.player;
+      const src = res.data;
 
-  componentWillUnmount() {
-    if (this.player) {
-      this.player.dispose();
-    }
+      // if (Hls.isSupported()) {
+      //   this.hls.loadSource(src);
+      //   this.hls.attachMedia(video);
+      //   this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
+      //     video.play();
+      //   });
+      // } else {
+      //   console.log(
+      //     "Our streaming services is unfornately not available on youre browser."
+      //   );
+      // }
+    });
   }
 
   render() {
     return (
       <>
-        {this.state.stream ? (
-          <div>
-            <div data-vjs-player>
-              <video
-                ref={(node) => (this.videoNode = node)}
-                className="video-js vjs-big-play-centered"
-              ></video>
-            </div>
-          </div>
-        ) : (
-          <span>" Loading ... "</span>
-        )}
+        {/* <video
+          className="videoCanvas"
+          ref={(player) => (this.player = player)}
+          autoPlay={true}
+        /> */}
       </>
     );
   }
