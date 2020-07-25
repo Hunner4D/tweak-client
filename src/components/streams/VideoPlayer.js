@@ -1,42 +1,50 @@
 import React from "react";
 import server from "../../apis/server";
-import Hls from "hls.js";
+import flv from "flv.js";
 
 class VideoPlayer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.hls = new Hls();
+    this.videoRef = React.createRef();
   }
 
   componentDidMount() {
-    server.get(`/rtmp/${this.props.uuid}`).then((res) => {
-      const video = this.player;
-      const src = res.data;
+    this.buildPlayer();
+  }
 
-      // if (Hls.isSupported()) {
-      //   this.hls.loadSource(src);
-      //   this.hls.attachMedia(video);
-      //   this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
-      //     video.play();
-      //   });
-      // } else {
-      //   console.log(
-      //     "Our streaming services is unfornately not available on youre browser."
-      //   );
-      // }
+  componentDidUpdate() {
+    this.buildPlayer();
+  }
+
+  componentWillUnmount() {
+    this.player.destroy();
+  }
+
+  buildPlayer() {
+    if (this.player || !this.props.uuid) {
+      return;
+    }
+
+    server.get(`/rtmp/${this.props.uuid}`).then((res) => {
+      this.player = flv.createPlayer({
+        type: "flv",
+        url: res.data,
+      });
+      this.player.attachMediaElement(this.videoRef.current);
+      this.player.load();
     });
   }
 
   render() {
+    if (!this.props.uuid) {
+      return <div>loading...</div>;
+    }
+
     return (
-      <>
-        {/* <video
-          className="videoCanvas"
-          ref={(player) => (this.player = player)}
-          autoPlay={true}
-        /> */}
-      </>
+      <div>
+        <video ref={this.videoRef} style={{ width: "100%" }} controls />
+      </div>
     );
   }
 }
