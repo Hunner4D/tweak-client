@@ -2,7 +2,8 @@ let activeItemGuide = {
   "/": "streams",
   "/streams/new": "create stream",
   "/streams/owned": "my streams",
-  "/profile/edit": "profile"
+  "/profile": "profile",
+  "/subscriptions": "subscriptions"
 };
 
 export const changePath = (path) => {

@@ -5,7 +5,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "SIGN_IN":
-      const { token, userInstance, username, profileImage, newUser } = action.payload;
+      const { token, userInstance, username, profileImage, newUser, category, about } = action.payload;
       return {
         ...state,
         isSignedIn: true,
@@ -14,15 +14,17 @@ export default (state = INITIAL_STATE, action) => {
         username,
         profileImage,
         newUser,
+        category,
+        about
       };
     case "SIGN_OUT":
       return { isSignedIn: false, userInstance: null };
 
+    case "EDIT":
+      return { ...state, ...action.payload };
+
     case "NEW_USER_FALSE":
       return { ...state, newUser: false };
-
-    case "GENERATE_STREAM_KEY":
-      return { ...state, stream_key: action.payload };
 
     default:
       return state;

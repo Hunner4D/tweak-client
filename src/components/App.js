@@ -6,8 +6,10 @@ import StreamCreate from "./streams/StreamCreate";
 import StreamEdit from "./streams/StreamEdit";
 import StreamList from "./streams/StreamList";
 import StreamShow from "./streams/StreamShow";
-import EditProfile from "./user/EditProfile";
 import StreamsOwned from "./streams/StreamOwned";
+import Profile from "./user/Profile";
+import EditProfile from "./user/EditProfile";
+import Subscriptions from "./user/Subscriptions";
 
 import { connect } from "react-redux";
 
@@ -16,30 +18,44 @@ const App = (props) => {
     if (props.isSignedIn) {
       return (
         <>
-          <Route
-            path="/streams/owned"
-            exact
-            render={({ history }) => <StreamsOwned history={history} />}
-          />
-          <Route
-            path="/streams/new"
-            exact
-            render={({ history }) => <StreamCreate history={history} />}
-          />
-          <Route
-            path="/streams/edit/:id"
-            exact
-            render={({ history, location }) => (
-              <StreamEdit location={location} history={history} />
-            )}
-          />
-          <Route
-            path="/profile/edit"
-            exact
-            render={({ history, location }) => (
-              <EditProfile location={location} />
-            )}
-          />
+            <Route
+              path="/streams/owned"
+              exact
+              render={({ history }) => <StreamsOwned history={history} />}
+            />
+            <Route
+              path="/streams/new"
+              exact
+              render={({ history }) => <StreamCreate history={history} />}
+            />
+            <Route
+              path="/streams/edit/:id"
+              exact
+              render={({ history, location }) => (
+                <StreamEdit location={location} history={history} />
+              )}
+            />
+            <Route
+              path="/profile"
+              exact
+              render={({ history, location }) => (
+                <Profile history={history} />
+              )}
+            />
+            <Route
+              path="/profile/edit/:id"
+              exact
+              render={({ history, location }) => (
+                <EditProfile history={history} location={location} />
+              )}
+            />
+            <Route
+              path="/subscriptions"
+              exact
+              render={({ history, location }) => (
+                <Subscriptions location={location} />
+              )}
+            />
         </>
       );
     }

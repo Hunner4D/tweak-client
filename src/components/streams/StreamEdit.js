@@ -98,13 +98,13 @@ const StreamEdit = (props) => {
     return (
       <Modal trigger={<Button fluid>Start Stream with Stream Key</Button>}>
         <Modal.Content image>
-        <Image
-          wrapped
-          size="medium"
-          floated={"right"}
-          rounded
-          src={props.profileImage}
-        />
+          <Image
+            wrapped
+            size="medium"
+            floated={"right"}
+            rounded
+            src={props.profileImage}
+          />
           <Modal.Description>
             <Header>You're all set!</Header>
             <p>Use the following key to connect to your stream: </p>{" "}
@@ -195,13 +195,13 @@ const StreamEdit = (props) => {
             </form>
           </Grid.Column>
           <Grid.Column>
-            <Segment size="massive">1</Segment>
+            <Segment size="massive"></Segment>
           </Grid.Column>
           <Grid.Column>
-            <Segment>1</Segment>
-            <Segment>2</Segment>
-            <Segment>3</Segment>
-            <Segment>4</Segment>
+            <Segment></Segment>
+            <Segment></Segment>
+            <Segment></Segment>
+            <Segment></Segment>
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -211,15 +211,30 @@ const StreamEdit = (props) => {
           <Grid.Column width={2}>
             <div></div>
           </Grid.Column>
-          <Grid.Column width={12}>
-            {renderStartStream()}
-            {/* <Segment>{renderFeed()}</Segment> */}
-          </Grid.Column>
+          <Grid.Column width={12}>{renderStartStream()}</Grid.Column>
           <Grid.Column width={2}>
             <div></div>
           </Grid.Column>
         </Grid.Row>
       </Grid>
+      <br />
+      <br />
+      <br />
+      <br />
+      <p>
+        You can use{" "}
+        <a target="_blank" href="https://obsproject.com/">
+          OBS
+        </a>{" "}
+        or
+        <a target="_blank" href="https://www.xsplit.com/">
+          XSplit
+        </a>{" "}
+        to Live stream. If you're using OBS, go to Settings > Stream and select
+        Custom from service dropdown. Enter <b>rtmp://localhost/live</b> in
+        server input field. Also, add your stream key for a given stream found
+        in "My Streams".
+      </p>
     </>
   );
 };

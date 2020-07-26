@@ -1,7 +1,9 @@
 import React from "react";
+import { Menu } from "semantic-ui-react";
+
 import { connect } from "react-redux";
 import { signIn, signOut } from "../actions/auth";
-import { Menu } from "semantic-ui-react";
+import { clearStreams, fetchMultipleStreams } from "../actions/streams";
 
 class GoogleAuth extends React.Component {
   componentDidMount() {
@@ -10,8 +12,7 @@ class GoogleAuth extends React.Component {
     window.gapi.load("client:auth2", () => {
       window.gapi.client
         .init({
-          clientId:
-            process.env.REACT_APP_OAUTH_CLIENT,
+          clientId: process.env.REACT_APP_OAUTH_CLIENT,
           scope: "email",
         })
         .then(() => {
@@ -39,6 +40,9 @@ class GoogleAuth extends React.Component {
 
   onSignOutClick = () => {
     this.auth.signOut();
+    this.props.clearStreams();
+    this.props.fetchMultipleStreams();
+    this.props.history.push("/");
   };
 
   renderAuthButton() {
@@ -72,4 +76,9 @@ const mapStateToProps = (state) => {
   return { isSignedIn: state.auth.isSignedIn };
 };
 
-export default connect(mapStateToProps, { signIn, signOut })(GoogleAuth);
+export default connect(mapStateToProps, {
+  signIn,
+  signOut,
+  clearStreams,
+  fetchMultipleStreams,
+})(GoogleAuth);

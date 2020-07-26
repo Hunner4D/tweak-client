@@ -36,3 +36,10 @@ export const deleteStream = (query) => async (dispatch) => {
   .then(() => dispatch({ type: "DELETE_STREAM", payload: query.streamId }))
   .catch((err) => console.log("there was an error deleting stream"));
 };
+
+export const clearStreams = () => {
+  return {
+    type: "CLEAR",
+    payload: []
+  }
+}

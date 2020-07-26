@@ -6,24 +6,27 @@ import { changePath } from "../actions/header";
 import { connect } from "react-redux";
 
 class Header extends React.Component {
-
   handleItemClick = (e, { name }) => {
     switch (name) {
       case "streams":
         this.props.changePath("/");
         this.props.history.push("/");
         break;
-      case "create stream":
-        this.props.changePath("/streams/new");
-        this.props.history.push("/streams/new");
+      case "subscriptions":
+        this.props.changePath("/subscriptions");
+        this.props.history.push("/subscriptions");
         break;
       case "my streams":
         this.props.changePath("/streams/owned");
         this.props.history.push("/streams/owned");
         break;
+      case "create stream":
+        this.props.changePath("/streams/new");
+        this.props.history.push("/streams/new");
+        break;
       case "profile":
-        this.props.changePath("/profile/edit");
-        this.props.history.push("/profile/edit");
+        this.props.changePath("/profile");
+        this.props.history.push("/profile");
         break;
       default:
         break;
@@ -34,6 +37,11 @@ class Header extends React.Component {
     if (this.props.isSignedIn) {
       return (
         <>
+          <Menu.Item
+            name="subscriptions"
+            active={this.props.activeItem === "subscriptions"}
+            onClick={this.handleItemClick}
+          />
           <Menu.Item
             name="my streams"
             active={this.props.activeItem === "my streams"}
@@ -63,6 +71,20 @@ class Header extends React.Component {
     }
   }
 
+  renderIfNotSignedIn() {
+    if (!this.props.isSignedIn) {
+      return (
+        <>
+          <Menu.Item
+            name="about"
+            active={this.props.activeItem === "about"}
+            onClick={this.handleItemClick}
+          />
+        </>
+      );
+    }
+  }
+
   render() {
     return (
       <div>
@@ -73,17 +95,13 @@ class Header extends React.Component {
             onClick={this.handleItemClick}
           />
           {this.renderIfSignedInLeft()}
-          <Menu.Item
-            name="about"
-            active={this.props.activeItem === "about"}
-            onClick={this.handleItemClick}
-          />
+          {this.renderIfNotSignedIn()}
           <Menu.Menu position="right">
             <Menu.Item>
               <Input icon="search" placeholder="Search..." />
             </Menu.Item>
             {this.renderIfSignedInRight()}
-            <GoogleAuth />
+            <GoogleAuth history={this.props.history} />
           </Menu.Menu>
         </Menu>
         <br />

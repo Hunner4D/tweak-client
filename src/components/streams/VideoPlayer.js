@@ -8,6 +8,7 @@ class VideoPlayer extends React.Component {
 
     this.videoRef = React.createRef();
   }
+  state = {url: null}
 
   componentDidMount() {
     this.buildPlayer();
@@ -27,12 +28,14 @@ class VideoPlayer extends React.Component {
     }
 
     server.get(`/rtmp/${this.props.uuid}`).then((res) => {
-      this.player = flv.createPlayer({
-        type: "flv",
-        url: res.data,
-      });
-      this.player.attachMediaElement(this.videoRef.current);
-      this.player.load();
+      if (res.data) {
+        this.player = flv.createPlayer({
+          type: "flv",
+          url: res.data,
+        });
+        this.player.attachMediaElement(this.videoRef.current);
+        this.player.load();
+      }
     });
   }
 
@@ -43,7 +46,11 @@ class VideoPlayer extends React.Component {
 
     return (
       <div>
-        <video ref={this.videoRef} style={{ width: "100%" }} controls />
+        <video
+          ref={this.videoRef}
+          style={{ width: "100%", marginTop: "42px" }}
+          controls
+        />
       </div>
     );
   }

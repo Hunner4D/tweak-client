@@ -12,10 +12,11 @@ export const signIn = (query) => async (dispatch) => {
     payload: {
       token: query,
       userInstance: response.instance,
-      stream_key: response.stream_key,
+      newUser: response.newUser,
       username: response.username,
       profileImage: response.profileImage,
-      newUser: response.newUser,
+      category: response.category,
+      about: response.about,
     },
   });
 };
@@ -26,17 +27,22 @@ export const signOut = () => {
   };
 };
 
+export const editProfile = (query) => async (dispatch) => {
+  let response = (
+    await server.post("/user/edit", {
+      idToken: query.idToken,
+      userInstance: query.userInstance,
+      data: query.data,
+    })
+  ).data;
+  dispatch({
+    type:"EDIT",
+    payload: { ...response }
+  })
+};
+
 export const newUserFalse = () => {
   return {
     type: "NEW_USER_FALSE",
   };
-};
-
-export const generateStreamKey = (query) => async (dispatch) => {
-  let response = (await server.post("/user/settings/stream_key", query)).data.stream_key;
-  
-  dispatch({
-    type: "GENERATE_STREAM_KEY",
-    payload: response,
-  });
 };

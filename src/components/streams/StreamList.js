@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import { Card } from "semantic-ui-react";
 import _ from "lodash";
 import { connect } from "react-redux";
-import { fetchMultipleStreams, deleteStream } from "../../actions/streams";
+import { fetchMultipleStreams, clearStreams } from "../../actions/streams";
 
 
 
 class StreamList extends React.Component {
+
   componentDidMount() {
+    this.props.clearStreams();
     this.props.fetchMultipleStreams();
   }
 
@@ -73,6 +75,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchMultipleStreams, deleteStream })(
+export default connect(mapStateToProps, { fetchMultipleStreams, clearStreams })(
   StreamList
 );
