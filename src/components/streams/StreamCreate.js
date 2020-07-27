@@ -63,7 +63,7 @@ class StreamCreate extends React.Component {
           <a target="_blank" href="https://www.xsplit.com/">
             XSplit
           </a>{" "}
-          to Live stream. If you're using OBS, go to Settings > Stream and
+          to Live stream. If you're using OBS, go to Settings {">"} Stream and
           select Custom from service dropdown. Enter{" "}
           <b>rtmp://localhost/live</b> in server input field. Also, add
           your stream key for a given stream found in "My Streams".

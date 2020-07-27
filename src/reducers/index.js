@@ -5,7 +5,7 @@ import streamReducer from "./streamReducer";
 import headerReducer from "./headerReducer";
 
 export default combineReducers({
-  replaceMe: () => "dummy reducer",
+  // replaceMe: () => "dummy reducer",
   form: formReducer,
   auth: authReducer,
   streams: streamReducer,

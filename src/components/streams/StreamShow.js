@@ -2,33 +2,9 @@ import React from "react";
 import { Grid, Segment, Feed, Container } from "semantic-ui-react";
 import { connect } from "react-redux";
 import VideoPlayer from "./VideoPlayer";
+import LiveChat from "./LiveChat";
 
 const StreamShow = (props) => {
-  const renderFeed = () => {
-    return (
-      <Container textAlign="center">
-        <Feed>
-          <Feed.Event>
-            <Feed.Label>
-              <img src="/images/avatar/small/elliot.jpg" alt="avatar"/>
-            </Feed.Label>
-            <Feed.Content>
-              <Feed.Summary>
-                <Feed.User>Elliot Fu</Feed.User> this stream fucking sucks
-                <Feed.Date>1 Hour Ago</Feed.Date>
-              </Feed.Summary>
-              {/* <Feed.Meta>
-              <Feed.Like>
-                <Icon name="like" />4 Likes
-              </Feed.Like>
-            </Feed.Meta> */}
-            </Feed.Content>
-          </Feed.Event>
-        </Feed>
-      </Container>
-    );
-  };
-
   return (
     <>
       <Grid columns={3} divided="vertically">
@@ -45,7 +21,7 @@ const StreamShow = (props) => {
           </Grid.Column>
           <Grid.Column>
             <Segment size="massive">
-              <VideoPlayer uuid={props.location.state.uuid}/>
+              <VideoPlayer uuid={props.location.state.uuid} />
             </Segment>
           </Grid.Column>
           <Grid.Column>
@@ -63,7 +39,9 @@ const StreamShow = (props) => {
             <div></div>
           </Grid.Column>
           <Grid.Column width={12}>
-            <Segment>{renderFeed()}</Segment>
+            <Segment>
+              <LiveChat />
+            </Segment>
           </Grid.Column>
           <Grid.Column width={2}>
             <div></div>

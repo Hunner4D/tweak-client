@@ -95,7 +95,7 @@ class StreamsOwned extends React.Component {
                 <Card.Content>
                   <Link
                     to={{
-                      pathname: `/streams/show/${_.truncate(stream.uuid, {
+                      pathname: `/streams/edit/${_.truncate(stream.uuid, {
                         length: 8,
                         omission: "",
                       })}`,
