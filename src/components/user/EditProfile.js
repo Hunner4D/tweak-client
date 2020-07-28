@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import {
   Button,
   Modal,
-  Icon,
   Form,
   Input,
   Select,
