@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
-import { Feed, Container, Segment, Input } from "semantic-ui-react";
+import { Feed, Container, Input } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 const socket = io(process.env.REACT_APP_CHAT_SOCKET, {
@@ -22,7 +22,7 @@ const LiveChat = (props) => {
     socket.on("message", (message) => {
       setMessages((messages) => [...messages, message]);
     });
-  }, []);
+  });
 
   const submit = (event) => {
     event.preventDefault();

@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Segment, Feed, Container } from "semantic-ui-react";
+import { Grid, Segment } from "semantic-ui-react";
 import { connect } from "react-redux";
 import VideoPlayer from "./VideoPlayer";
 import LiveChat from "./LiveChat";
