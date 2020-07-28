@@ -40,7 +40,7 @@ const StreamShow = (props) => {
           </Grid.Column>
           <Grid.Column width={12}>
             <Segment>
-              <LiveChat />
+              <LiveChat pathname={props.location.pathname}/>
             </Segment>
           </Grid.Column>
           <Grid.Column width={2}>
