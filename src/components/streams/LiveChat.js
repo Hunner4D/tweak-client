@@ -18,11 +18,14 @@ const LiveChat = (props) => {
     socket.on("connect", () => {
       socket.emit("userConnect", chatId);
     });
+  })
 
+  useEffect(() => {
     socket.on("message", (message) => {
+      console.log(message)
       setMessages((messages) => [...messages, message]);
     });
-  });
+  })
 
   const submit = (event) => {
     event.preventDefault();
