@@ -23,7 +23,7 @@ const LiveChat = (props) => {
   useEffect(() => {
     socket.on("message", (message) => {
       console.log(message)
-      setMessages((messages) => [...messages, message]);
+      setMessages([...messages, message]);
     });
   })
 
