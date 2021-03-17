@@ -1,12 +1,12 @@
 # Project: Twitch* (Client)
 
 This project will act as a service similar to [Twitch](https://www.twitch.tv/) where it will allow users to livestream content and build a following.
+ <!--  -->
 The server to run this can be found [here](https://github.com/Hunner4D/tweak-api).
 
 ## Summary
 
   - [Getting Started](#getting-started)
-  <!-- - [Runing the tests](#running-the-tests) -->
   - [Deployment](#deployment)
   - [Built With](#built-with)
   - [Authors](#authors)
