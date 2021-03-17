@@ -64,7 +64,7 @@ What these tests test and why
 This project will be uploaded through AWS. A link will be made available as soon as it is deployed.
 
 
-## (Client )Built With
+## Client Built With
 
   - [React.Js](https://reactjs.org/)
   - [Redux](https://redux.js.org/)
