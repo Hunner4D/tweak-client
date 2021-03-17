@@ -29,7 +29,7 @@ const LiveChat = (props) => {
 
   const submit = (event) => {
     event.preventDefault();
-    console.log("submitted: ", message, "recieved: ", messages);
+    console.log("submitted: ", message, " --- recieved: ", messages);
     socket.emit("send", {
       message,
       chatId,
